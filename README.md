@@ -25,3 +25,6 @@ The MIT license chosen is for the overall project (index, meta information, work
 
   [1]: http://arcscripts.esri.com
   [2]: https://community.esri.com/thread/182094-please-restore-arcscripts
+
+## Coda
+I don't need to own this project and I'm not all fired up to complete the archive. I just wanted to use this or something like it, and couldn't find one. So if you _are_ fired up and motivated to take it on I'm happy to transfer ownership or grant maintainer/admin access. 
