@@ -1,6 +1,6 @@
 # An Arcscripts Archive
 
-a) listing of content published to Esri ArcScripts before it went offline, and
+a) listing of content published to Esri ArcScripts before it went offline, and  
 b) restored copies of said content - when and if found
 
 # License
