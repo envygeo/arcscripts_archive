@@ -4,8 +4,7 @@ a) listing of content published to [Esri ArcScripts][1] before it went offline, 
 b) restored copies of said content - when and if found
 
 
-Index list source is a post from Jim Barry in the thread [Please restore ArcScripts][2] on GeoNet. 
-
+The index csv is sourced from a post from Jim Barry in the thread [Please restore ArcScripts][2] on GeoNet. For convenience it's also in xls, but the csv remains definitive record (for version control).
 
 ## Contributing Guidelines
 
