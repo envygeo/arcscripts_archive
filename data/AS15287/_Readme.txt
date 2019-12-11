@@ -1,0 +1,54 @@
+# Source: Jim Barry, Geonet forum
+# Url: https://community.esri.com/message/895793-re-please-restore-arcscripts?commentID=895793&et=watches.email.thread#comment-895793
+# Retrieved_date: 2019-12-11
+15287
+Geographic Transformation formula maps
+ArcGIS Desktop
+Visual Basic
+GeographicTransformationMaps.zip
+AS15287.zip
+17-Oct-07
+17-Oct-07
+Esri
+1238519
+515
+Robert
+Burke
+No code here. Just three pdf files.     Also the language is listed as Visual Basic, however    The zip file contains three pdf files which are maps. Polygons on each map indicate a generalized geographic area covered by a particular formula. If polygons overlap, more than one formula could be possible for that overlap area.  
+NULL
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
