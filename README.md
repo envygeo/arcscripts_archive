@@ -18,10 +18,8 @@ Include a Readme with a short description of how you retrieved the package (e.g.
 Please look for and indicate if the ArcScript has a newer version on https://codesharing.arcgis.com/.
 
 ### Method
-- Extract zip to `./data/AS12345`
-- Create `./data/AS12345/_Readme.txt`
-    - copy paste `12345` row from `ArcScripts_items.csv`
-    - regex search & replace `\t` with `\r\n` (replace tabs with new line)
+- Extract zip to `./data/AS9999`
+- Create `./data/AS9999/_Readme.txt`
     - insert header metadata on source and retrieval date:
     
     ~~~
@@ -43,6 +41,6 @@ We're using [Git Large File Storage][3] extension. Please install it, check if t
 ## License
 The MIT license chosen is for the overall project (index, meta information, workflows, update scripts, etc.). Each script could have it's own license, underneath the license Esri used when the original collection was compiled.
 
-  [1]: http://arcscripts.esri.com
-  [2]: https://community.esri.com/thread/182094-please-restore-arcscripts
-  [3]: https://git-lfs.github.com/
+[1]: http://arcscripts.esri.com
+[2]: https://community.esri.com/thread/182094-please-restore-arcscripts
+[3]: https://git-lfs.github.com/
