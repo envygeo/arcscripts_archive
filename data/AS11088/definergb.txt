@@ -1,0 +1,37 @@
+' *************************************************************************
+' DefineRGB
+'
+' Allows user to define new colors using RGB values.
+'
+' This script prompts the user for RGB values and then creates a new
+' color using these values. The color is then added to the color palette.
+'
+' Created: Mark Carniello, 24.1.1996
+'
+' *************************************************************************
+
+
+
+
+
+mySymWin = av.GetSymbolWin
+mySymWin.Open
+mySymWin.SetPanel(#SYMBOLWIN_PANEL_COLOR)
+myPalette = mySymWin.GetPalette
+myPaletteList =  myPalette.GetList(#PALETTE_LIST_COLOR)
+
+MyStringValueList = MsgBox.MultiInput("Please enter RGB Values:","GBRMPA",{"red","green","blue"},{"255","255","255"})
+if (MyStringValueList.Count = 0) then
+  exit
+end
+MyValueList = List.Make
+MyValueList.Add(MyStringValueList.Get(0).AsNumber)
+MyValueList.Add(MyStringValueList.Get(1).AsNumber)
+MyValueList.Add(MyStringValueList.Get(2).AsNumber)
+myColor = Color.Make
+myColor.SetRGBList(MyValueList)
+
+myPaletteList.Add(myColor)
+mySymWin.RefreshPalette(#PALETTE_LIST_COLOR)
+
+
