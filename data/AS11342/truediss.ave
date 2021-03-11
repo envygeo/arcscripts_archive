@@ -1,0 +1,107 @@
+'###############################################################################################
+'# THE TRICKY DISSOLVE: This script dissolves common lines of polygon boundaries. The way how  #
+'#           this script works is quite tricky :-). It collects all parts of ingoing polygons  # 
+'#           that have the same field value. After collection is done, an overall polygon      #
+'#           will be generated using all parts. The inner topology of structure dissolves      #
+'#           the common boundaries automatically - isn't this tricky? You dont have to care    #
+'#           about intersection or union - polygons that are not intersecting will stay as     #
+'#           a part in the polygon, thus every result is handeled as a multipart polygon so    #
+'#           that at the end all parts are exploded and written to the new shapefile.          #
+'#           For me this way is amazing because it fast, comfortable and precise. Have FUN and #
+'#           think about the way it works!!!                                                   #                                                   
+'#                                                                                             #
+'#           Michael Herter                                                                    #   
+'#           ESRI Germany                                                                      #
+'#           Support and Services                                                              #
+'#           email: m.herter@esri-germany.de                                                   #  
+'#                                                                                             #
+'###############################################################################################
+
+
+
+theView = av.GetActiveDoc
+theThemes = theView.GetActiveThemes
+If (theThemes.Count > 1) then
+  Msgbox.Error("Please activate only one theme","More than one active themes")
+  exit
+end
+
+theTheme = theThemes.Get(0)
+
+aFileName = av.GetProject.MakeFileName("Theme","shp")
+NewFile = FileDialog.put(aFileName,"*.shp","Save shapefile to")
+if (NewFile = nil)
+  then
+  exit
+end
+
+theVTab = theTheme.GetFTab
+shpfld = theVTab.FindField("Shape")
+dissfld = MsgBox.Choice(theVTab.GetFields, "Choose a numeric field to dissolve", "Select values")
+NewFTab = FTab.MakeNew (newfile, Polygon)
+NewShpFld = NewFTab.FindField ("Shape") 
+IdFld = Field.Make ("ID", #FIELD_LONG, 6, 0)
+NewFTab.AddFields ({Idfld})
+
+ext = MsgBox.YESNO("Do you want to explode the multipolygon?", "Explode", true)
+
+vallist = {}
+'collect values
+
+for each rec in theVTab
+
+  val =  theVTab.ReturnValue(dissfld, rec)
+  vallist.add(val)
+ 
+end
+
+vallist.removeduplicates
+theBitMap = theVTab.GetSelection
+
+for each val in vallist
+  
+  theTheme.ClearSelection
+  theQueryString = "(["+dissfld.getname+"] = "+val.AsString+")"
+  theVTab.Query (theQueryString, theBitmap, #VTAB_SELTYPE_NEW)
+  theVTab.UpdateSelection
+  
+  listofparts = {}
+  
+  
+  for each selrec in theVTab.GetSelection
+  
+    shp = theVTab.ReturnValue(shpfld, selrec)
+    partlist = shp.clone.aspolyline.aslist
+    
+    for each part in partlist
+      listofparts.add(part) 
+    end  
+  
+  end  
+  
+  unionpoly = Polygon.Make(listofparts)
+  
+  singleparts = unionpoly.explode
+ 
+  if(ext) then
+  
+    for each part in singleparts
+    
+      rec = NewFTab.AddRecord
+      NewFTab.SetValue(NewShpFld, rec, part)
+      NewFTab.SetValue(Idfld, rec, val   )
+    
+    end  
+   
+  else
+    
+     rec = NewFTab.AddRecord
+     NewFTab.SetValue(NewShpFld, rec, unionpoly)
+     NewFTab.SetValue(Idfld, rec, val   )
+
+  end
+   
+end
+
+theTheme.ClearSelection
+theView.Invalidate
